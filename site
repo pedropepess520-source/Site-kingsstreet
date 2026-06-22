@@ -1,0 +1,909 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kings Street | Streetwear & Futebol</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #F5C518;
+      --green: #1A7A2E;
+      --black: #0A0A0A;
+      --dark: #111111;
+      --card: #161616;
+      --white: #F0EDE6;
+      --gray: #888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ---- NAVBAR ---- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 6%;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(245,197,24,0.15);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 3px;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--white); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--black) !important;
+      padding: 8px 20px;
+      border-radius: 2px;
+    }
+    .nav-cta:hover { background: #d4a900; color: var(--black) !important; }
+
+    /* ---- HERO ---- */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 120px 6% 80px;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 60%, rgba(245,197,24,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(26,122,46,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(245,197,24,0.1);
+      border: 1px solid rgba(245,197,24,0.4);
+      color: var(--gold);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 2px;
+      margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4.5rem, 14vw, 11rem);
+      line-height: .92;
+      letter-spacing: 4px;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .hero-title .highlight {
+      color: var(--gold);
+      display: block;
+    }
+
+    .hero-slogan {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-top: 18px;
+    }
+
+    .hero-slogan span { color: var(--green); }
+
+    .hero-actions {
+      margin-top: 48px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: #d4a900; transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color .2s, transform .15s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .hero-stats {
+      margin-top: 72px;
+      display: flex;
+      gap: 60px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .stat {
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+    .stat-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* ---- SECTION COMMONS ---- */
+    section { padding: 100px 6%; }
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(245,197,24,0.08);
+      border: 1px solid rgba(245,197,24,0.3);
+      color: var(--gold);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--gold);
+      margin: 24px 0;
+    }
+
+    /* ---- SOBRE ---- */
+    #sobre {
+      background: var(--dark);
+    }
+
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .sobre-text p {
+      font-size: 1.05rem;
+      color: #bbb;
+      line-height: 1.85;
+      margin-bottom: 20px;
+    }
+
+    .sobre-text p strong { color: var(--gold); }
+
+    .sobre-visual {
+      position: relative;
+    }
+
+    .sobre-img-wrap {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sobre-img-wrap::before {
+      content: '';
+      position: absolute;
+      top: -12px; left: -12px; right: 12px; bottom: 12px;
+      border: 2px solid var(--gold);
+      border-radius: 4px;
+      z-index: 0;
+    }
+
+    .sobre-img-wrap img {
+      width: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .badge-sobre {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      padding: 16px 22px;
+      border-radius: 3px;
+      z-index: 2;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    /* ---- MISSÃO & VISÃO ---- */
+    #missao-visao {
+      background: var(--black);
+    }
+
+    .mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .mv-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+    .mv-card:hover { border-color: rgba(245,197,24,0.4); }
+
+    .mv-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--gold);
+      border-radius: 4px 0 0 4px;
+    }
+
+    .mv-icon {
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .mv-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 2px;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .mv-card p {
+      color: #bbb;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    /* ---- VALORES ---- */
+    #valores {
+      background: var(--dark);
+    }
+
+    .valores-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 64px;
+    }
+
+    .valores-header .divider { margin: 24px auto; }
+
+    .valores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .valor-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 36px 32px;
+      transition: transform .3s, border-color .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .valor-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(245,197,24,0.35);
+    }
+
+    .valor-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: rgba(245,197,24,0.08);
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      line-height: 1;
+    }
+
+    .valor-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
+
+    .valor-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .valor-card p {
+      color: #aaa;
+      font-size: .95rem;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .valor-lema {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-size: .9rem;
+      color: var(--green);
+      border-left: 2px solid var(--green);
+      padding-left: 12px;
+    }
+
+    /* ---- PRODUTOS ---- */
+    #produtos {
+      background: var(--black);
+    }
+
+    .produtos-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 64px;
+    }
+    .produtos-header .divider { margin: 24px auto; }
+
+    .produtos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .produto-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform .3s, border-color .3s;
+    }
+    .produto-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(245,197,24,0.4);
+    }
+
+    .produto-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s;
+    }
+    .produto-card:hover .produto-img { transform: scale(1.04); }
+
+    .produto-info {
+      padding: 24px;
+    }
+
+    .produto-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+
+    .produto-nome {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 1.5px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .produto-desc {
+      font-size: .9rem;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    /* ---- PÚBLICO ---- */
+    #publico {
+      background: var(--dark);
+    }
+
+    .publico-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .publico-text .section-title { margin-bottom: 16px; }
+
+    .publico-text p {
+      color: #bbb;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      margin-bottom: 24px;
+    }
+
+    .publico-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      background: rgba(245,197,24,0.1);
+      border: 1px solid rgba(245,197,24,0.3);
+      color: var(--gold);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .9rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 20px;
+    }
+
+    .publico-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .publico-box {
+      background: var(--card);
+      border: 1px solid rgba(245,197,24,0.2);
+      border-radius: 4px;
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .publico-age {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 6rem;
+      color: var(--gold);
+      line-height: 1;
+      letter-spacing: 3px;
+    }
+
+    .publico-age-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #888;
+      font-size: .9rem;
+      margin-bottom: 32px;
+    }
+
+    .publico-features {
+      list-style: none;
+      text-align: left;
+    }
+
+    .publico-features li {
+      font-size: .95rem;
+      color: #bbb;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .publico-features li::before {
+      content: '▸';
+      color: var(--gold);
+      font-size: .8rem;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: #050505;
+      border-top: 1px solid rgba(245,197,24,0.15);
+      padding: 64px 6% 32px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 5px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .footer-slogan {
+      font-family: 'Barlow Condensed', sans-serif;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-size: .9rem;
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #666;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .9rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy {
+      color: #333;
+      font-size: .8rem;
+      letter-spacing: 1px;
+    }
+
+    /* ---- SCROLLBAR ---- */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    /* ---- RESPONSIVO ---- */
+    @media (max-width: 900px) {
+      .sobre-grid,
+      .mv-grid,
+      .publico-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .sobre-visual { display: none; }
+      nav { padding: 16px 4%; }
+      .nav-links { display: none; }
+      section { padding: 70px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">KINGS<span>STREET</span></a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#missao-visao">Missão</a></li>
+      <li><a href="#valores">Valores</a></li>
+      <li><a href="#produtos">Coleção</a></li>
+      <li><a href="#publico" class="nav-cta">Nossa Banca</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-tag">👑 Streetwear &amp; Futebol — Direto da Rua</div>
+    <h1 class="hero-title">
+      Kings
+      <span class="highlight">Street</span>
+    </h1>
+    <p class="hero-slogan">Da rua pro jogo. Do jogo pro <span>mundo</span>.</p>
+    <div class="hero-actions">
+      <a href="#produtos" class="btn-primary">Ver Coleção</a>
+      <a href="#missao-visao" class="btn-outline">Conheça a Marca</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Fundadores</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3♛</div>
+        <div class="stat-label">Coroas — Nossa Identidade</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Autenticidade</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="sobre-grid">
+      <div class="sobre-text">
+        <span class="section-tag">Nossa História</span>
+        <h2 class="section-title">Nascida nas Ruas.<br>Construída no Corre.</h2>
+        <div class="divider"></div>
+        <p>
+          A <strong>Kings Street</strong> nasceu da união de três amigos com um sonho em comum: criar uma marca que represente de verdade quem vive a cultura de rua, que torce, que joga na várzea, que ouve boa música e que se veste com atitude.
+        </p>
+        <p>
+          As <strong>três coroas</strong> que identificam a marca não são apenas símbolo — são o espelho dos três fundadores e o compromisso que assumiram entre si: lealdade, respeito e autenticidade acima de tudo.
+        </p>
+        <p>
+          Aqui, moda e futebol se encontram no mesmo território: a rua. Cada peça que sai da Kings Street carrega a essência do jogo, da quebrada e do corre diário.
+        </p>
+        <a href="#valores" class="btn-primary" style="display:inline-block;margin-top:16px;">Nossos Valores</a>
+      </div>
+      <div class="sobre-visual">
+        <div class="sobre-img-wrap">
+          <img src="camisa.png" alt="Camisa Kings Street" />
+          <div class="badge-sobre">Coleção<br>2025</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSÃO & VISÃO -->
+  <section id="missao-visao">
+    <div style="text-align:center;margin-bottom:56px;">
+      <span class="section-tag">Propósito</span>
+      <h2 class="section-title">Para Onde Vamos</h2>
+    </div>
+    <div class="mv-grid" style="max-width:1100px;margin:0 auto;">
+      <div class="mv-card">
+        <span class="mv-icon">🎯</span>
+        <h3>Missão</h3>
+        <p>
+          Criar moda streetwear autêntica que una futebol e cultura urbana, oferecendo peças de qualidade que reflitam a identidade de quem vive a rua. Nossa missão é ser mais do que uma marca — somos um movimento que valoriza raiz, comunidade e atitude.
+        </p>
+      </div>
+      <div class="mv-card">
+        <span class="mv-icon">🔭</span>
+        <h3>Visão</h3>
+        <p>
+          Ser reconhecida como a principal marca de streetwear com DNA futebolístico do Brasil, construindo uma comunidade sólida de pessoas que se identificam com nossos valores e que usam a Kings Street como expressão da própria identidade.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALORES -->
+  <section id="valores">
+    <div class="valores-header">
+      <span class="section-tag">Quem Somos</span>
+      <h2 class="section-title">Nossos Valores</h2>
+      <div class="divider"></div>
+      <p style="color:#888;font-size:1rem;line-height:1.7;">
+        Cinco pilares que guiam cada decisão, cada costura e cada passo da Kings Street.
+      </p>
+    </div>
+    <div class="valores-grid">
+
+      <div class="valor-card">
+        <span class="valor-num">01</span>
+        <span class="valor-icon">🤝</span>
+        <h3>Lealdade — A Base da Banca</h3>
+        <p>Transparência com os sócios, justiça com os colaboradores e honestidade com o cliente. Na rua e no futebol, a palavra vale mais que o contrato.</p>
+        <div class="valor-lema">Fechados com os nossos, do começo ao fim.</div>
+      </div>
+
+      <div class="valor-card">
+        <span class="valor-num">02</span>
+        <span class="valor-icon">⚖️</span>
+        <h3>Respeito ao Jogo</h3>
+        <p>Concorrência limpa, preços justos e respeito à identidade de cada cliente. Para a Kings Street vencer, ninguém precisa ser prejudicado.</p>
+        <div class="valor-lema">Jogo limpo dentro e fora de campo.</div>
+      </div>
+
+      <div class="valor-card">
+        <span class="valor-num">03</span>
+        <span class="valor-icon">🌱</span>
+        <h3>Raiz e Autenticidade</h3>
+        <p>Peças originais, cultura de rua real — sem cópias, sem filtro. Honramos a história de onde a marca veio e o corre dos três fundadores.</p>
+        <div class="valor-lema">Verdadeiro com a nossa essência e com a nossa história.</div>
+      </div>
+
+      <div class="valor-card">
+        <span class="valor-num">04</span>
+        <span class="valor-icon">👥</span>
+        <h3>Coletividade</h3>
+        <p>Um time é feito de passes. Apoiamos a cena local, a várzea, os artistas de rua e os fornecedores da comunidade. A gente cresce e puxa junto.</p>
+        <div class="valor-lema">Nenhum de nós é tão forte quanto todos nós juntos.</div>
+      </div>
+
+      <div class="valor-card">
+        <span class="valor-num">05</span>
+        <span class="valor-icon">⚡</span>
+        <h3>Atitude com Responsabilidade</h3>
+        <p>Estilo e atitude não significam inconsequência. Trabalho duro, qualidade que dura e responsabilidade com o futuro do negócio e do cliente.</p>
+        <div class="valor-lema">A nossa pressa é fazer história com responsabilidade.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRODUTOS -->
+  <section id="produtos">
+    <div class="produtos-header">
+      <span class="section-tag">Coleção</span>
+      <h2 class="section-title">Nossas Peças</h2>
+      <div class="divider"></div>
+      <p style="color:#888;font-size:1rem;line-height:1.7;">
+        Streetwear com alma de campo. Cada peça é um manifesto.
+      </p>
+    </div>
+    <div class="produtos-grid">
+
+      <div class="produto-card">
+        <img src="camisa.png" class="produto-img" alt="Camisa Kings Street - Brasil Edition" />
+        <div class="produto-info">
+          <div class="produto-tag">Destaque da Coleção</div>
+          <div class="produto-nome">Brasil Edition</div>
+          <p class="produto-desc">Camisa com corte esportivo, estampa de graffiti e logo das três coroas. Cultura de rua e futebol no mesmo rolê.</p>
+        </div>
+      </div>
+
+      <div class="produto-card">
+        <img src="camisa.png" class="produto-img" alt="Camisa Kings Street - Street Classic" style="filter:hue-rotate(180deg) saturate(0.8);" />
+        <div class="produto-info">
+          <div class="produto-tag">Clássico Urbano</div>
+          <div class="produto-nome">Street Classic</div>
+          <p class="produto-desc">O modelo que define a identidade Kings Street: leve, versátil e com aquela pegada que não tem par nas ruas.</p>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:48px;">
+      <p style="color:#666;font-family:'Barlow Condensed',sans-serif;letter-spacing:2px;text-transform:uppercase;font-size:.9rem;margin-bottom:20px;">Novidades chegando — siga a gente nas redes</p>
+      <a href="https://www.instagram.com/kingsstreet51/" target="_blank" style="color:var(--gold);font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;letter-spacing:2px;text-decoration:underline;text-underline-offset:4px;transition:color .2s;" onmouseover="this.style.color='#d4a900'" onmouseout="this.style.color='var(--gold)'">📸 @kingsstreet51</a>
+    </div>
+  </section>
+
+  <!-- PÚBLICO -->
+  <section id="publico">
+    <div class="publico-inner">
+      <div class="publico-text">
+        <span class="section-tag">Nossa Banca</span>
+        <h2 class="section-title">Feito pra Quem<br>Vive de Verdade</h2>
+        <div class="divider"></div>
+        <p>
+          A Kings Street foi criada para os jovens que vivem a rua com autenticidade — quem joga bola, curte música, se veste com atitude e não tem medo de mostrar quem é.
+        </p>
+        <p>
+          Nossa marca chega através das redes sociais, conectando-se com quem compartilha os mesmos valores: lealdade, cultura e amor pelo jogo.
+        </p>
+        <div class="publico-pills">
+          <span class="pill">⚽ Futebol</span>
+          <span class="pill">🎨 Arte Urbana</span>
+          <span class="pill">🎵 Música de Rua</span>
+          <span class="pill">👟 Moda Streetwear</span>
+          <span class="pill">📲 Redes Sociais</span>
+          <span class="pill">🏘️ Comunidade</span>
+        </div>
+      </div>
+      <div class="publico-visual">
+        <div class="publico-box">
+          <div class="publico-age">16–35</div>
+          <div class="publico-age-label">Anos de idade</div>
+          <ul class="publico-features">
+            <li>Apaixonados por futebol e cultura urbana</li>
+            <li>Conectados e ativos nas redes sociais</li>
+            <li>Valorizam autenticidade na moda</li>
+            <li>Identificam-se com a quebrada e a várzea</li>
+            <li>Buscam estilo com identidade própria</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">KINGS STREET</div>
+    <div class="footer-slogan">Da rua pro jogo. Do jogo pro mundo.</div>
+    <div class="footer-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#missao-visao">Missão &amp; Visão</a>
+      <a href="#valores">Valores</a>
+      <a href="#produtos">Coleção</a>
+      <a href="#publico">Nossa Banca</a>
+    </div>
+    <p class="footer-copy">© 2025 Kings Street. Todos os direitos reservados. Feito com atitude e lealdade. 👑</p>
+  </footer>
+
+</body>
+</html>
